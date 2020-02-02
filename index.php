@@ -20,6 +20,9 @@ require_once 'Pagination.class.php';
 require_once 'DB.class.php';
 $db = new DB();
 
+//Load CSS and JS files
+require_once 'public/includeCenter.php';
+
 // Page offset and limit
 $perPageLimit = 2;
 $offset = !empty($_GET['page'])?(($_GET['page']-1)*$perPageLimit):0;
@@ -70,7 +73,8 @@ $users = $db->getRows('users', $con);
 <?php }elseif(!empty($statusMsg) && ($statusMsgType == 'error')){ ?>
     <div class="alert alert-danger"><?php echo $statusMsg; ?></div>
 <?php } ?>
-
+<br><br><br>
+<div class="container">
 <div class="row">
     <div class="col-md-12 search-panel">
         <!-- Search form -->
@@ -89,6 +93,8 @@ $users = $db->getRows('users', $con);
         <span class="pull-right">
             <a href="addEdit.php" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> New User</a>
         </span>
+        <br><br>
+
     </div>
 
     <!-- Data list table -->
@@ -125,4 +131,5 @@ $users = $db->getRows('users', $con);
 
     <!-- Display pagination links -->
     <?php echo $pagination->createLinks(); ?>
+</div>
 </div>

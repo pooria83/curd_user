@@ -3,6 +3,9 @@
 // Start session
 session_start();
 
+//Load CSS and JS files
+require_once 'public/includeCenter.php';
+
 $postData = $userData = array();
 
 // Get session data
@@ -48,6 +51,7 @@ $actionLabel = !empty($_GET['id'])?'Edit':'Add';
 <?php } ?>
 
 <!-- Add/Edit form -->
+<div class="container">
 <div class="panel panel-default">
     <div class="panel-heading"><?php echo $actionLabel; ?> User <a href="index.php" class="glyphicon glyphicon-arrow-left"></a></div>
     <div class="panel-body">
@@ -68,4 +72,5 @@ $actionLabel = !empty($_GET['id'])?'Edit':'Add';
             <input type="submit" name="userSubmit" class="btn btn-success" value="SUBMIT"/>
         </form>
     </div>
+</div>
 </div>
