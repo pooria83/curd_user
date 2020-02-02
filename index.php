@@ -112,6 +112,17 @@ $users = $db->getRows('users', $con);
         <?php
         if(!empty($users)){ $count = 0;
             foreach($users as $user){ $count++;
+                if ($user['status'] == 1)
+                {
+                    $classString = 'btn btn-info';
+                    $buttonString = 'Inactive';
+
+                }
+                else
+                {
+                    $classString = 'btn btn-success';
+                    $buttonString = 'Active';
+                }
                 ?>
                 <tr>
                     <td><?php echo '#'.$count; ?></td>
@@ -119,8 +130,10 @@ $users = $db->getRows('users', $con);
                     <td><?php echo $user['email']; ?></td>
                     <td><?php echo $user['phone']; ?></td>
                     <td>
-                        <a href="addEdit.php?id=<?php echo $user['id']; ?>" class="btn btn-warning">Edit</a>
+                        <a href="addEdit.php?action_type=edit&id=<?php echo $user['id']; ?>" class="btn btn-warning">Edit</a>
                         <a href="userAction.php?action_type=delete&id=<?php echo $user['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                        <a href="addEdit.php?action_type=<?= $buttonString ?>&id=<?php echo $user['id']; ?>" class="<?= $classString ?>"><?= $buttonString ?></a>
+
                     </td>
                 </tr>
             <?php } }else{ ?>
