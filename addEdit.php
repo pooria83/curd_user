@@ -1,10 +1,14 @@
 <?php
-
+print_r($_GET);
 // Start session
 session_start();
 
 //Load CSS and JS files
 require_once 'public/includeCenter.php';
+
+//Include database Class
+require_once 'DB.class.php';
+$db = new DB();
 
 $postData = $userData = array();
 
@@ -24,16 +28,26 @@ if(!empty($sessData['postData'])){
     unset($_SESSION['sessData']['postData']);
 }
 
-// Get user data
-if(!empty($_GET['id'])){
-    include 'DB.class.php';
-    $db = new DB();
-    $conditions['where'] = array(
-        'id' => $_GET['id'],
-    );
+// Edit user data
+if (isset($_GET['action_type']) && $_GET['action_type'] == 'edit' && !empty($_GET['id']))
+{
+    // Get user data
+    $conditions['where'] = [
+        'id' => $_GET['id']
+    ];
     $conditions['return_type'] = 'single';
-    $userData = $db->getRows('users', $conditions);
+    $userData = $db->getRows('users' , $conditions);
+
+    //Active or inactive users
 }
+if (isset($_GET['action_type']) && ($_GET['action_type'] == 'active' ||
+        $_GET['action_type'] == 'inactive') && !empty($_GET['id']))
+{
+    $redirectURL = "userAction.php?id={$_GET['id']}&action_type={$_GET['action_type']}";
+    header("Location: ".$redirectURL);
+
+}
+
 
 // Pre-filled data
 $userData = !empty($postData)?$postData:$userData;
