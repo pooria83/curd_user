@@ -1,5 +1,7 @@
 <?php
 
+
+
 // Start session
 session_start();
 
@@ -102,6 +104,14 @@ if(isset($_POST['userSubmit'])){
 
     // Store status into the session
     $_SESSION['sessData'] = $sessData;
+}
+elseif(($_REQUEST['action_type'] == 'active'
+        || $_REQUEST['action_type'] == 'inactive') &&
+    !empty($_REQUEST['id']))
+{
+    $_REQUEST['action_type'] == 'active' ? $userData=array('status' => 1) : $userData=array('status' => 0);
+    $condition = array('id' => $_REQUEST['id']);
+   $update = $db->update($tblName,$userData,$condition);
 }
 
 // Redirect the user
