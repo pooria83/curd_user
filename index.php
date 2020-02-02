@@ -82,8 +82,8 @@ $users = $db->getRows('users', $con);
             <div class="input-group">
                 <input type="text" name="sq" class="form-control" placeholder="Search by keyword..." value="<?php echo $searchKeyword; ?>">
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
+                    <button class="btn btn-dark" type="submit">
+                        Search
                     </button>
                 </div>
             </div>
