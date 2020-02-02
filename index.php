@@ -119,8 +119,8 @@ $users = $db->getRows('users', $con);
                     <td><?php echo $user['email']; ?></td>
                     <td><?php echo $user['phone']; ?></td>
                     <td>
-                        <a href="addEdit.php?id=<?php echo $user['id']; ?>" class="glyphicon glyphicon-edit"></a>
-                        <a href="userAction.php?action_type=delete&id=<?php echo $user['id']; ?>" class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete?')"></a>
+                        <a href="addEdit.php?id=<?php echo $user['id']; ?>" class="btn btn-warning">Edit</a>
+                        <a href="userAction.php?action_type=delete&id=<?php echo $user['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
                     </td>
                 </tr>
             <?php } }else{ ?>
